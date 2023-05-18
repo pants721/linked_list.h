@@ -54,8 +54,8 @@ Node *linked_list_back(LinkedList *list);
 Node *linked_list_front(LinkedList *list);
 void linked_list_push_back(LinkedList *list, int data);
 void linked_list_push_front(LinkedList *list, int data);
-void linked_list_pop_back(LinkedList *list);
-void linked_list_pop_front(LinkedList *list);
+int linked_list_pop_back(LinkedList *list);
+int linked_list_pop_front(LinkedList *list);
 /* void linked_list_remove_value(LinkedList *list, int data); */
 void linked_list_remove(LinkedList *list, size_t index);
 int linked_list_length(LinkedList *list);
@@ -163,7 +163,7 @@ Node *linked_list_front(LinkedList *list) {
 }
 
 void linked_list_push_back(LinkedList *list, int data) {
-  // TODO: Improve time complexity
+  // TODO: Improve time complexity to O(1)
   Node *current = NULL;
   if (list->head == NULL) {
     list->head = node_create(data);
@@ -194,22 +194,29 @@ void linked_list_push_front(LinkedList *list, int data) {
 
 }
 
-void linked_list_pop_back(LinkedList *list) {
-    // TODO: Improve time complexity
+int linked_list_pop_back(LinkedList *list) {
+    // TODO: Improve time complexity to O(1)
     Node *current = list->head;
     while (current->next != NULL) {
         current = current->next;
     }
 
+
     // Reached when current->next is NULL
+    int ret = current->data;
     node_destroy(current);
+
+    return ret;
 }
 
-void linked_list_pop_front(LinkedList *list) {
+int linked_list_pop_front(LinkedList *list) {
     Node *current = list->head;
     list->head = current->next;
 
+    int ret = current->data;
     node_destroy(current);
+
+    return ret;
 }
 
 /* void linked_list_remove_value(LinkedList *list, int data) { */
