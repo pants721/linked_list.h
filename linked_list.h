@@ -61,7 +61,6 @@ void linked_list_remove(LinkedList *list, size_t index);
 int linked_list_length(LinkedList *list);
 bool linked_list_contains(LinkedList *list, int data);
 bool linked_list_is_empty(LinkedList *list);
-void linked_list_reverse(LinkedList *list); // UNIMPLEMENTED
 
 #endif // LINKED_LIST_H
 
@@ -290,10 +289,6 @@ bool linked_list_is_empty(LinkedList *list) {
     }
 
     return false;
-}
-
-void linked_list_reverse(LinkedList *list) {
-
 }
 
 #endif // LINKED_LIST_IMPL
