@@ -100,7 +100,7 @@ void node_destroy(Node *node) {
     free(node);
 }
 
-LinkedList *linked_list_create() {
+LinkedList *linked_list_create(void) {
     LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
     if (list == NULL) {
         return NULL;
@@ -111,16 +111,16 @@ LinkedList *linked_list_create() {
     return list;
 }
 
+// TODO: MAKE THIS WORK FFS
 void linked_list_destroy(LinkedList *list) {
-    Node *tmp;
-
-    // Iterate until a head's next points to NULL
-    while (list->head != NULL) {
-        tmp = list->head; // Store current head
-        list->head = list->head->next; // Move on to next node
-        free(tmp); // Free memory held by the previous head
+    Node *current = list->head;
+    while (current != NULL) {
+        current = current->next;
+        free((void *)current->prev);
     }
 
+    list->head = NULL;
+    free(list->head);
     free(list);
 }
 
@@ -278,6 +278,7 @@ bool linked_list_contains(LinkedList *list, int data) {
         if (current->data == data) {
             return true;
         }
+        current = current->next;
     }
 
     return false;
